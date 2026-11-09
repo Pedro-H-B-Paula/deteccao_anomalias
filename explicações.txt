@@ -1,0 +1,51 @@
+df['Class'].value_counts(normalize=True)
+
+df = a abreviação de uma variavel de leitura feita
+
+['Class'] = escolhendo um grupo especifico dessa variavel
+
+value_counts = conta a quantidade de vezes que tal valor aparece
+
+normalize = mostra as quantidades se False, se for True exibe em forma de porcentagem
+--------------------------------------------------------------------------------
+Feature Engineering é o processo que criar ou transformar variáveis para otimizar e melhorar o desempenho do modelo
+--------------------------------------------------------------------------------
+df['Amount_log'] = np.log1p(df['Amount']) 
+
+pq usar isso?
+
+quando transformado em log, todos os valores que são 0 deixam de existir, pois log de 0 n vai existir
+--------------------------------------------------------------------------------
+Regressão Logística é normalmente usado como um modelo base(baseline) grande parte das vezes, servindo como referência para outros que virão, garantido se eles funcionam ou não.
+--------------------------------------------------------------------------------
+Por que escalas diferentes são ruins para o modelo?
+>>>
+Imagine que o algoritmo utilize essas duas informações para aprender a identificar fraudes.
+
+O problema é que os números possuem escalas muito diferentes:
+- Valor da compra: centenas ou milhares.
+- Quantidade de compras: unidades ou dezenas.
+Em algoritmos sensíveis à escala, como a Regressão Logística, isso pode dificultar o treinamento e fazer com que a otimização dos parâmetros seja menos eficiente.
+2. Como o Scaler resolve isso?
+O StandardScaler() transforma os valores usando a média e o desvio padrão.
+
+Por exemplo, imagine que, depois da padronização, os dados fiquem assim:
+Característica	Antes	Depois
+Valor da compra	1.500	1,2
+Quantidade de compras	3	0,8
+--------------------------------------------------------------------------------
+Cada rodada utiliza duas partes para treinar e uma para validar.
+Rodada 1
+Validação Treino Treino
+
+Rodada 2
+Treino Validação Treino
+
+Rodada 3
+Treino Treino Validação
+
+para não ter uma alta taxa de acertos por sorte, o cv organiza de forma diferente os blocos dos dados alternando qual deles foi para teste e para treino, a fim de fazer com que o modelos tenha diferentes forma de treino, escolhendo a melhor saída
+
+Cada configuração é avaliada nas três rodadas.
+
+Portanto, serão realizados 12 treinamentos (4 configurações × 3 rodadas), a melhor configuração é treinada denovo para se certificar
